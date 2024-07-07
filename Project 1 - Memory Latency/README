@@ -1,0 +1,74 @@
+shirashko
+209144013
+EX: 1
+
+FILES:
+memory_latency.cpp -- Main program source file that measures memory read latency.
+'README' -- This file containing the assignment description and answers to the questions.
+'Makefile' -- Makefile for compiling the program.
+'results.png' -- Graphical representation of the assignment 2 results obtained from the memory latency measurements.
+'lscpu.png' -- Screenshot of the lscpu and lscpu -C commands outputs showing CPU details.
+'page_size.png' -- Screenshot of the getconf PAGE_SIZE command output showing the system page size.
+
+ANSWERS:
+Assignment 1: Understanding WhatIDo - System Call Tracing with strace
+WhatIDo program follows these specific steps:
+1. Initialization and Error Handling:
+- Argument Check: Immediately upon execution, WhatIDo checks whether exactly one command-line argument has been provided.
+If the argument count does not meet this requirement, the program outputs an error message to stderr indicating that a
+single argument is expected and terminates with a status code of 0, indicating a normal exit without proceeding to the
+main functionalities due to the incorrect number of input arguments.
+- Library Setup: If the argument check passes, the program proceeds to load necessary libraries and configurations,
+preparing the environment for file operations.
+2. File Creation and Manipulation: The program creates a directory named "Welcome", and within it creates three files:
+"Welcome", "To", and "OS-2024". It then writes specific messages into these files:
+- "Welcome": Contains a reminder to read course guidelines.
+- "To": Contains advice to start exercises early.
+- "OS-2024": Wishes the user good luck.
+3. Cleanup and Exit: After the content writing, the program deletes all created files and the directory, leaving no
+trace on the file system. It then exits with a status of 0, indicating successful execution without any errors.
+
+Assignment 2: Measuring Memory Access Latency Across Cache Levels and RAM - Explanation of the Results
+Explanation of the Obtained Results - What Can We See in the Graph?
+In this part of the assignment, I measured memory access latencies across different levels of caches (L1, L2, L3) and
+RAM to understand how data size influences access times relative to cache size and main memory. The program
+systematically increased the array size in bytes, crossing the thresholds of L1, L2, and L3 caches. The latency of the
+access pattern was measured by averaging the access times over a user-provided number of repetitions. The results,
+visualized in results.png, illustrate the latency as a function of array size for two test scenarios: sequential and
+random access.
+
+Random Access Latency:
+- For data that fits within the L1 cache, access latency is consistently low, which is typical for L1 caches using
+virtual addresses. As the array size exceeds the L1 cache capacity, we observe a gradual increase in latency (a "knee"
+rather than a "step" at the cache cutoff point) due to L1 cache misses.
+- The latency increases to an average between the L1 and L2 cache latencies until it approaches the L2 cache size. As
+the array size exceeds the L2 cache capacity, L2 cache misses occur, and latency increases as accesses start involving
+L3 cache checks. The transition from L2 to L3 caches also exhibits a "knee" pattern for similar reasons.
+- After exceeding the L3 cache size, there is a significant increase in latency as data accesses start hitting the main
+memory (RAM). Accessing data from RAM takes much longer, and the larger the array, the more frequent these RAM accesses,
+resulting in increased latency.
+- It's important to note that L2 and L3 cache misses start before actually reaching their respective sizes because these
+caches are keyed by the physical address of the data they store. Since a contiguous block of data in virtual memory (the
+array) is not necessarily contiguous in physical memory, the cache sets may not be uniformly filled, leading to cache
+misses even before the array size hits the L2 cache size.
+
+Access Patterns:
+- The random access pattern results in higher latency compared to sequential access across all data sizes. Before
+reaching the L1 cache size, this can be explained by subtle changes in the compiled code, and these differences are
+minor and negligible.
+- When the array size exceeds the L1 cache size, the difference becomes highly significant. This is due to the
+inefficiency of random accesses in utilizing the prefetching and block capabilities of modern CPUs, which are optimized
+for predictable sequential access patterns.
+- Sequential access benefits from cache line efficiency and hardware prefetching. As the CPU loads an entire cache line
+(typically 64 bytes), subsequent accesses within this line are much faster, maintaining low latency even for larger arrays.
+
+
+Bonus:
+Additional Overhead Beyond L3 Cache: The graph includes a marker for the page table eviction threshold. When this
+threshold is reached, page table entries begin to be evicted from the cache, leading to further increases in latency
+due to additional memory accesses required for page table lookups. As we approach the L3 cache size, latency increases
+gradually because not all memory accesses result in L3 cache misses. At this point, the page table still fits within the
+L3 cache, typically involving one L3 lookup and potentially one RAM access if the data is not in the L3 cache. Once the
+array size exceeds the page table eviction threshold, each memory operation requires fetching the page table entry from
+RAM before retrieving the actual data, effectively doubling the number of RAM accesses needed. This results in a
+significant increase in latency.
