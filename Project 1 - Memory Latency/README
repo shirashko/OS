@@ -1,7 +1,3 @@
-shirashko
-209144013
-EX: 1
-
 FILES:
 memory_latency.cpp -- Main program source file that measures memory read latency.
 'README' -- This file containing the assignment description and answers to the questions.
