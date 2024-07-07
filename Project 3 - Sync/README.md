@@ -6,8 +6,9 @@ This project is a MapReduce framework implemented in C++. It supports parallel p
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mapreduce-framework.git
-   cd mapreduce-framework
+   cd ..
+   mv "Project 3 - Sync" ../mapreduce-framework
+   cd ../mapreduce-framework
    ```
 
 2. Build the project:
