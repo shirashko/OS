@@ -1,0 +1,114 @@
+shirashko, amit.benaim
+Shir Rashkovits (209144013), Amit Benaim (209186402)
+EX: 2
+
+FILES:
+uthread.cpp - a source file with the user level threads library functions implementation
+README - A file containing Part 1: Theoretical Questions and Answers
+Makefile - A file for creating the library, creating a tar file, and cleaning.
+
+ANSWERS:
+Here are answers to theoretical questions:
+Question 1:
+a. The sigsetjmp and siglongjmp functions are used to implement user-level thread management by allowing the program to
+save and restore the state of threads.
+- Saving State: When a thread is about to be suspended, sigsetjmp is used to save its current state (CPU registers,
+which include the stack pointer and program counter) into a buffer.
+- Restoring State: When it is time for the thread to resume execution, siglongjmp is called with the buffer holding the
+saved state. This restores the thread's state and resumes execution from the point where sigsetjmp was called.
+
+In more details:
+The sigsetjmp function takes two arguments:
+- env (of type sigjmp_buf): This argument holds the saved state of the thread, including the program counter (PC),
+stack pointer (SP), and signal mask if the second argument is not set to zero.
+- savesigs (of type int): This argument indicates whether the current signal mask should be saved as well. If savesigs
+is non-zero, the signal mask is saved along with the thread state.
+The return value of sigsetjmp is an int. When sigsetjmp is called directly, it returns 0. If siglongjmp is called
+later to restore the state saved by sigsetjmp, sigsetjmp returns the user-defined value provided as the second argument
+to siglongjmp.
+
+The siglongjmp function takes two arguments:
+- env (of type sigjmp_buf): This argument holds the saved state of the thread (including the CPU registers and the stack).
+- val (of type int): This is the value that sigsetjmp will return when the state is restored. If val is 0, it is treated
+as 1 (to differentiate it from the direct call to sigsetjmp).
+When siglongjmp is called, it restores the thread's state (including the program counter), causing the program to resume
+execution from the point where sigsetjmp was originally called.
+
+b. A signal mask is a mechanism that allows a thread to control which signals it wants to block and which it is willing
+to receive. Signals are messages sent by the operating system to a process/thread to notify it of certain events, such
+as a request to stop the process (like pressing Ctrl+C).
+If the savesigs parameter of sigsetjmp is non-zero, sigsetjmp saves the current signal mask along with the CPU state.
+Then, when siglongjmp is called to restore the state saved by sigsetjmp, it will also restore the saved signal mask if
+it was saved. This means that the signal mask will be the same as it was when sigsetjmp was called.
+This functionality ensures that the signal handling state of the thread is preserved across thread switches, allowing
+the thread to continue handling signals as expected after being resumed.
+
+Question 2:
+2. A general use case for using user-level threads can be high-concurrency web servers. User-level threads are a
+reasonable choice for such a use case because they offer several key advantages for web servers, including efficient
+context switching, and customizable scheduling. Efficient context switching without large
+overhead of the operating system is crucial for web servers, handling numerous client connections, as user-level threads
+are managed by a user-level thread library rather than the operating system. This eliminates the need for costly mode
+switches between user and kernel space, resulting in faster and more responsive task management.
+Customizable scheduling allows web servers to define their own thread scheduling policies. This flexibility improves
+overall system throughput and responsiveness, essential for handling high volumes of web traffic.
+
+Question 3:
+- Advantages of creating a new Process for each tab instead of creating a kernel-level thread:
+Isolation and Security: Processes are protected from each other and require the operating system to communicate between
+them. Each tab running as a separate process means that if one tab crashes or is compromised by malicious code, it
+won't affect the other tabs. This enhances the security and stability of the browser. Additionally, processes have their
+own memory space. Thus, resource management-wise, each process has its own independent memory space, preventing memory
+leaks or overuse of memory in one tab from affecting others. For example, one tab open on your bank account and another
+with a less secure website – this isolation prevents a leak of your
+
+- Disadvantages of creating a new Process for each tab instead of creating a kernel-level thread:
+Higher overhead of creating a new process for each tab, because all operations require a kernel trap, which is a
+significant work (overhead). Creating and managing multiple processes incurs more overhead than managing multiple
+threads. This includes higher memory usage and CPU time spent on context switching. In comparison, kernel level threads
+have only medium overhead- operations require a kernel trap, but little work, since more of the address space is shared.
+
+Question 4:
+c. Interrupts and signals involved:
+  Keyboard Input Interrupt:
+- Triggered by: Pressing the keys to type the command in the shell.
+- Handled by: The operating system (OS) interrupt handler.
+- Description: When typing kill pid in the shell, the keyboard generates hardware interrupts for each keypress. The
+  interrupt controller forwards these interrupts to the CPU, and the OS interrupt handler processes them to convert the
+  key presses into characters that appear in the shell.
+
+  System Call (kill command):
+- Triggered by: The kill command entered in the shell.
+- Handled by: The shell and the OS.
+- Description: When typing kill pid, the shell interprets the command and invokes the kill system call, passing the
+  specified PID and the default signal (SIGTERM) to the OS. SIGTERM is a generic signal used to cause program
+  termination. Unlike SIGKILL, this signal can be blocked, handled, and ignored.
+
+  Signal (SIGTERM):
+- Triggered by: the kill system call execution.
+- Handled by: The target application (Shotwell).
+- Description:  When using Strace, the kill system call sends the SIGTERM signal to the target process (Shotwell).
+  This signal requests the process to terminate gracefully, allowing it to perform any necessary cleanup before exiting.
+
+  Signal Handling by the Application:
+- Triggered by: Receiving the SIGTERM signal.
+- Handled by: The target application (Shotwell, in this case).
+- Description: The application can handle the SIGTERM signal by executing a signal handler function if it has one
+  defined. If the application does not handle the signal, the default action is to terminate the process. When running
+  the Strace command, we observed that the Shotwell process receives the SIGTERM signal and exits with exit code 0 right
+  afterward, indicating a successful termination.
+
+Question 5:
+- Real Time
+  Definition: Real time refers to the actual, continuous time as measured by a clock.
+  Example: Application latency response. When a user of an app measures how long it takes to perform a certain action,
+  he measures it in real time. Thus it is recommended that programmers make sure the user response latency is
+  reasonable, to ensure good user experience, since it includes all delays caused by external factors, such as waiting
+  for I/O operations or being preempted by other processes.
+
+- Virtual Time
+  Definition: Virtual time is an abstraction used by the operating system to represent the progress of a process or
+  thread based on the CPU time consumed. It excludes any time the process/thread is idle, waiting for I/O operations,
+  or preempted by other processes.
+  Example: In a multitasking operating system, virtual time is used to measure the amount of CPU time allocated to each
+  process, ensuring fair scheduling and resource management.
