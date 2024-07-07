@@ -1,0 +1,10 @@
+shirashko, amit.benaim
+Shir Rashkovits (209144013), Amit Benaim (209186402)
+EX: 3
+
+FILES:
+README - A file containing the submitters info and the files attached.
+Makefile - A file for creating the library, creating a tar file, dependencies, and cleaning.
+MapReduceFramework.cpp - Source file of the framework.
+Barrier.cpp - Source file for the barrier implementation provided with the exercise.
+Barrier.h - Header file for the barrier implementation provided with the exercise.
