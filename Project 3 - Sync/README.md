@@ -2,6 +2,8 @@
 
 This project is a MapReduce framework implemented in C++. It supports parallel processing of large datasets using multiple threads. The framework is designed to divide the work among several threads, process the data in parallel, and then combine the results.
 
+![How MapReduce Works](images/How-MapReduce-Works.png)
+
 ## Installation
 
 1. Clone the repository:
