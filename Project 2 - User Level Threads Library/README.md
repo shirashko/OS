@@ -1,8 +1,13 @@
 # User-Level Threads Library
 
+<img src="images/Diagram.jpeg" alt="clock signals for context switch" width="500">
+
 ## Introduction
 
 This project implements a static library for managing user-level threads. The library provides functionality to create, manage, and schedule user-level threads using the Round-Robin scheduling algorithm. It allows for efficient context switching and customizable thread scheduling.
+
+<img src="images/RR1.jpeg" alt="clock signals for context switch" width="400">
+<img src="images/RR2.jpeg" alt="clock signals for context switch" width=400">
 
 ## File Structure
 
@@ -82,3 +87,5 @@ This will generate a static library file named `libuthreads.a`.
 - The library should a maximum of `MAX_THREAD_NUM` threads, including the main thread.
 - The main thread (tid = 0) uses the same stack, PC, and registers that were used when `uthread_init` is called.
 - The library handle possible signal races by blocking and unblocking signals at the right places.
+
+<img src="images/Clock.jpeg" alt="clock signals for context switch" width="200">
