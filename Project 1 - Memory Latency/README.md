@@ -71,6 +71,8 @@ g++ -std=c++11 -O3 -Wall memory_latency.cpp measure.cpp -o memory_latency
 ```
 
 ### Results
+<img src="results.png" alt="Strace Command" width="550">
+
 The program outputs the size of the allocated array and the average latency measurements for random and sequential accesses.
 
 ### Graph and Analysis
@@ -91,7 +93,6 @@ The graph illustrates the latency as a function of array size for two test scena
 ### Bonus: Page Table Eviction Threshold
 Estimate the page table eviction threshold and add it to the graph. Explain the behavior observed when the array size exceeds the L3 cache size.
 
-<img src="results.png" alt="Strace Command" width="550">
 
 ### Files
 - `memory_latency.cpp`: Main program source file.
