@@ -2,6 +2,8 @@
 
 ## Assignment 1: Understanding WhatIDo - System Call Tracing with strace
 
+<img src="images/strace.jpeg" alt="Strace Command" width="550">
+
 ### Description
 This part of the assignment aims to help us become familiar with the `strace` command. `strace` is a Linux command that traces system calls and signals of a program. It is an important tool to debug programs.
 
