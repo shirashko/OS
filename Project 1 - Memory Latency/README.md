@@ -98,3 +98,4 @@ Estimate the page table eviction threshold and add it to the graph. Explain the 
 - `results.png`: Graphical representation of the results.
 - `lscpu.png`: Screenshot of the `lscpu` command output.
 - `page_size.png`: Screenshot of the `getconf PAGE_SIZE` command output.
+- `images`: Images to present in this README
