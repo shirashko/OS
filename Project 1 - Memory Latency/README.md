@@ -39,7 +39,60 @@ The program measures the average memory access latency of different memory level
 - Allocating an array with the desired memory size and accessing it.
 - Measuring access latency for random and sequential access patterns.
 
+### The Memory Latency Program
+The program measures the average memory access latency of different memory levels by:
+- Allocating an array with the desired memory size and accessing it.
+- Measuring access latency for random and sequential access patterns.
+
 ### Compilation
 To compile the program, use the following command:
 ```sh
 g++ -std=c++11 -O3 -Wall memory_latency.cpp measure.cpp -o memory_latency
+```
+
+### Running the Program
+```sh
+./memory_latency <max_size> <factor> <repeat>
+```
+- `max_size`: Maximum size of the memory array in bytes.
+- `factor`: Growth factor for memory sizes.
+- `repeat`: Number of times to repeat each measurement.
+
+### Example
+```sh
+./memory_latency 800 1.5 200
+```
+
+### Results
+The program outputs the size of the allocated array and the average latency measurements for random and sequential accesses.
+
+### Graph and Analysis
+Include a graph with the results, showing memory size on the x-axis and latency on the y-axis. Use logarithmic scales if necessary.
+
+#### Explanation of the Results
+The graph illustrates the latency as a function of array size for two test scenarios: sequential and random access.
+
+- **Random Access Latency**:
+  - Low latency for data fitting within the L1 cache.
+  - Gradual increase as the array size exceeds L1 and L2 cache capacities.
+  - Significant increase in latency when accessing RAM.
+
+- **Sequential Access Latency**:
+  - Benefits from cache line efficiency and hardware prefetching.
+  - Lower latency compared to random access for larger arrays.
+
+### Bonus: Page Table Eviction Threshold
+Estimate the page table eviction threshold and add it to the graph. Explain the behavior observed when the array size exceeds the L3 cache size.
+
+### Memory Hierarchy
+The following image shows the hierarchy of memory types and their relative speeds and sizes:
+
+![Memory Hierarchy](image.png)
+
+### Files
+- `memory_latency.cpp`: Main program source file.
+- `README.md`: This file containing the assignment description and explanations.
+- `Makefile`: For compiling the program.
+- `results.png`: Graphical representation of the results.
+- `lscpu.png`: Screenshot of the `lscpu` command output.
+- `page_size.png`: Screenshot of the `getconf PAGE_SIZE` command output.
