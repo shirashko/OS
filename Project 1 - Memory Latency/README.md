@@ -28,6 +28,11 @@ The `WhatIDo` program follows these specific steps:
 ### Background
 In this assignment, we measure memory read latency for the cache levels and RAM access in the target machine. We use a partially implemented C code designed to measure memory access times as accurately as possible.
 
+### Memory Hierarchy
+The following image shows the hierarchy of memory types and their relative speeds and sizes:
+
+<img src="images/memory.jpeg" alt="Memory Hierarchy" width="600">
+
 ### Steps
 1. **Complete the missing parts in the memory latency program**.
 2. **Set-up a virtual machine (VM)**.
@@ -85,11 +90,6 @@ The graph illustrates the latency as a function of array size for two test scena
 
 ### Bonus: Page Table Eviction Threshold
 Estimate the page table eviction threshold and add it to the graph. Explain the behavior observed when the array size exceeds the L3 cache size.
-
-### Memory Hierarchy
-The following image shows the hierarchy of memory types and their relative speeds and sizes:
-
-<img src="images/memory.jpeg" alt="Memory Hierarchy" width="600">
 
 ### Files
 - `memory_latency.cpp`: Main program source file.
