@@ -87,7 +87,7 @@ Estimate the page table eviction threshold and add it to the graph. Explain the 
 ### Memory Hierarchy
 The following image shows the hierarchy of memory types and their relative speeds and sizes:
 
-![Memory Hierarchy](image.png)
+<img src="images/memory.jpeg" alt="Memory Hierarchy" width="600">
 
 ### Files
 - `memory_latency.cpp`: Main program source file.
