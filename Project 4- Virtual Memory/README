@@ -1,0 +1,11 @@
+shirashko, amit.benaim
+Shir Rashkovits (209144013), Amit Benaim (209186402)
+EX: 4
+
+FILES:
+VirtualMemory.cpp -- the implementation of the VirtualMemory
+README -- this file with the required information
+Makefile -- a file with the required targets (tar->ex4.tar, clean->leave only the files originally in the submission)
+
+REMARKS:
+No remarks.
