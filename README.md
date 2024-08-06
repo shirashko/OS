@@ -1,6 +1,8 @@
 # Operating Systems Projects
 
-This repository contains multiple projects related to Operating Systems. Each project demonstrates different concepts and techniques in operating systems, such as memory latency, user-level threads, and synchronization using MapReduce.
+This repository contains multiple projects related to Operating Systems. Each project demonstrates different concepts and techniques in operating systems, such as memory latency, user-level threads, synchronization using MapReduce, and the implementation of virtual memory paging for translating virtual addresses to physical addresses.
+
+<img src="https://www.cs.virginia.edu/~bjc8c/class/cs6456-f19/images/narrow_waist.png" alt="OS Image" width="500">
 
 ## Course Overview
 
@@ -8,7 +10,7 @@ This repository provides a comprehensive look into various aspects of operating 
 
 ## Projects
 
-Each project directory contains the source code, a detailed README, and any additional resources required.
+Each project directory contains the source code, a Makefile to build the project, a detailed README, and any additional resources required.
 
 ### Project 1 - Memory Latency
 
@@ -21,6 +23,10 @@ This project involves the implementation of a user-level threads library. It cov
 ### Project 3 - Sync
 
 This project is a MapReduce framework. It supports parallel processing of large datasets using multiple threads. The framework is designed to divide the work among several threads, process the data in parallel, and then combine the results.
+
+### Project 4 - Virtual Memory Paging
+
+This project implements virtual memory paging using hierarchical page tables. It efficiently handles page eviction and victim selection using DFS and a given policy. The physical memory—main memory and disk—are simulated by encapsulated class with data structures to allow easy focus on the mapping and page fault handling itself.
 
 ## Installation
 
