@@ -2,7 +2,7 @@
 
 ## Assignment 1: Understanding WhatIDo - System Call Tracing with strace
 
-<img src="images/strace.jpeg" alt="Strace Command" width="550">
+<img src="images/strace.jpeg" alt="Strace Command" width="450">
 
 ### Background
 This part of the assignment aims to help us become familiar with the `strace` command. `strace` is a Linux command that traces system calls and signals of a program. It is an important tool to debug programs.
@@ -31,7 +31,7 @@ In this assignment, we measure memory read latency for the cache levels and RAM 
 ### Memory Hierarchy
 The following image shows the hierarchy of memory types and their relative speeds and sizes:
 
-<img src="images/memory.jpeg" alt="Memory Hierarchy" width="600">
+<img src="images/memory.jpeg" alt="Memory Hierarchy" width="450">
 
 ### Steps
 1. **Complete the missing parts in the memory latency program**.
