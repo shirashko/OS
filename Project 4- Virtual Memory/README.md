@@ -4,6 +4,8 @@
 
 This project implements a virtual memory interface using hierarchical page tables of arbitrary depth. The implementation simulates physical memory and handles virtual to physical address translation, page faults, and page evictions.
 
+<img src="https://static.javatpoint.com/operating-system/images/what-is-hashed-page-table-in-operating-system2.png" alt="OS Image" width="400">
+
 ## Files
 
 - `VirtualMemory.cpp`: The implementation of the virtual memory interface.
